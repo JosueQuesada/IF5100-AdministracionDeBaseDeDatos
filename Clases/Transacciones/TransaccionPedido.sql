@@ -4,9 +4,10 @@ GO
 BEGIN TRY
     BEGIN TRANSACTION;
 
-    DECLARE @ClienteId INT = 1;
+    DECLARE @ClienteId INT = 9;
 
     -- 1. Validar cliente activo
+
     IF NOT EXISTS (SELECT 1 FROM CLIENTES WHERE CLIENTE_ID = @ClienteId AND ESTADO = 1)
         THROW 50001, 'Cliente inválido o inactivo', 1;
 
@@ -59,3 +60,9 @@ BEGIN CATCH
     IF @@TRANCOUNT > 0 ROLLBACK TRANSACTION;
     PRINT 'Error: ' + ERROR_MESSAGE();
 END CATCH;
+
+select * from PEDIDOS
+
+select * from PRODUCTO_PEDIDO
+
+select * from CLIENTES

@@ -1,5 +1,5 @@
 BEGIN TRY
-    BEGIN TRANSACTION;
+    BEGIN TRANSACTION miTransaccion;
 
     DECLARE @PedidoId INT;
 
@@ -19,10 +19,10 @@ BEGIN TRY
     )
         THROW 50003, 'Stock insuficiente (simulado)', 1;
 
-    COMMIT TRANSACTION;
+    COMMIT TRANSACTION miTransaccion;
 END TRY
 BEGIN CATCH
-    IF @@TRANCOUNT > 0 ROLLBACK TRANSACTION;
+    IF @@TRANCOUNT > 0 ROLLBACK TRANSACTION miTransaccion;
     PRINT 'Se ejecutó ROLLBACK por: ' + ERROR_MESSAGE();
 END CATCH;
 
